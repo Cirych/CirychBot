@@ -1,28 +1,34 @@
 {
-    "name": "cirych-bot",
-    "version": "0.0.1",
-    "private": true,
-    "description": "@CirychBot for Telegram messenger",
-    "main": "index.js",
-    "scripts": {
-        "start": "node ./index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Cirych/CirychBot.git"
-    },
-    "keywords": [
-        "@CirychBot",
-        "Telegram"
-    ],
-    "author": {
-        "name": "Cirych",
-        "url": "http://cirych.github.io"
-    },
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/Cirych/CirychBot/issues"
-    },
-    "homepage": "https://github.com/Cirych/CirychBot#readme"
+  "name": "cirych-bot",
+  "version": "0.0.1",
+  "private": true,
+  "description": "@CirychBot for Telegram messenger",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cirych/CirychBot.git"
+  },
+  "keywords": [
+    "@CirychBot",
+    "Telegram"
+  ],
+  "author": {
+    "name": "Cirych",
+    "url": "http://cirych.github.io"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cirych/CirychBot/issues"
+  },
+  "homepage": "https://github.com/Cirych/CirychBot#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "coveralls": "^2.11.6",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.0.0"
+  }
 }
