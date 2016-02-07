@@ -10,12 +10,27 @@ describe("main", function () {
 */
 
 var mainModule = require('../dist/main.js');
-describe('ES6', function () {
+var botModule = require('../dist/bot.js');
+
+describe('Main module', function () {
     let main;
     beforeEach(() => {
         main = new mainModule.Main();
     });
     it('Testing', () => {
         expect(main.test()).toEqual('from main');
+    });
+    it('Bot status Ok', () => {
+        expect(main.status()).toEqual('Ok!');
+    });
+});
+
+describe('Bot module', function () {
+    let bot;
+    beforeEach(() => {
+        bot = new botModule.Bot();
+    });
+    it('Bot status Bad', () => {
+        expect(bot.status()).toEqual('Panic!');
     });
 });

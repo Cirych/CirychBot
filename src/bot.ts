@@ -12,6 +12,6 @@ export class Bot {
     }
     
     status(): string {
-        return this.internals.token ? "Ok!" : "Panic!";
+        return this.internals ? "Ok!" : "Panic!";
     }
 }
