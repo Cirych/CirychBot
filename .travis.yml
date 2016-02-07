@@ -7,3 +7,5 @@ cache:
         - node_modules
 after_success:
     - npm run test-cov
+notifications:
+    email: false
