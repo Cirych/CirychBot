@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "prestart": "tsc",
-        "start": "node ./dist/main.js",
+        "start": "node ./index.js",
         "pretest": "tsc",
         "test": "jasmine",
         "test-fast": "istanbul cover --include-all-sources node_modules/jasmine/bin/jasmine.js",
