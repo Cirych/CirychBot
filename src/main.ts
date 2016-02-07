@@ -1,7 +1,7 @@
 "use strict";
 
-import {Settings} from "./Settings";
-import {Bot} from "./Bot";
+import {Settings} from "./settings";
+import {Bot} from "./bot";
 
 /*
 var settings = new Settings({
