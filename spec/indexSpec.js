@@ -10,13 +10,13 @@ describe("main", function () {
 });
 */
 
-var main = require('../dist/main.js');
+var mainModule = require('../dist/main.js');
 describe('ES6', function () {
     let main;
     beforeEach(() => {
-        main = new main.Main();
+        main = new mainModule.Main();
     });
     it('Testing', () => {
-        expect(main.test('Do Something')).toEqual('Do Something');
+        expect(main.test('Success')).toEqual('Success');
     });
 });
