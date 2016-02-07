@@ -1,41 +1,42 @@
 {
-  "name": "cirych-bot",
-  "version": "0.0.1",
-  "private": true,
-  "description": "@CirychBot for Telegram messenger",
-  "main": "index.js",
-  "scripts": {
-    "start": "node ./dist/main.js",
-    "pretest": "tsc",
-    "test": "jasmine",
-    "test-cov": "istanbul cover node_modules/jasmine/bin/jasmine.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Cirych/CirychBot.git"
-  },
-  "keywords": [
-    "@CirychBot",
-    "Telegram"
-  ],
-  "author": {
-    "name": "Cirych",
-    "url": "http://cirych.github.io"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Cirych/CirychBot/issues"
-  },
-  "homepage": "https://github.com/Cirych/CirychBot#readme",
-  "engines": {
-    "node": ">=5.3.0"
-  },
-  "dependencies": {
-  },
-  "devDependencies": {
-      "jasmine": "^2.4.1",
-      "istanbul": "^0.4.2",
-      "coveralls": "^2.11.6",
-      "typescript": "^1.7.5"
-  }
+    "name": "cirych-bot",
+    "version": "0.0.2",
+    "private": true,
+    "description": "@CirychBot for Telegram messenger",
+    "main": "index.js",
+    "scripts": {
+        "prestart": "tsc",
+        "start": "node ./dist/main.js",
+        "pretest": "tsc",
+        "test": "jasmine",
+        "test-fast": "istanbul cover --include-all-sources node_modules/jasmine/bin/jasmine.js",
+        "test-cov": "istanbul cover --include-all-sources node_modules/jasmine/bin/jasmine.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Cirych/CirychBot.git"
+    },
+    "keywords": [
+        "@CirychBot",
+        "Telegram"
+    ],
+    "author": {
+        "name": "Cirych",
+        "url": "http://cirych.github.io"
+    },
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Cirych/CirychBot/issues"
+    },
+    "homepage": "https://github.com/Cirych/CirychBot#readme",
+    "engines": {
+        "node": ">=5.3.0"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "jasmine": "^2.4.1",
+        "istanbul": "^0.4.2",
+        "coveralls": "^2.11.6",
+        "typescript": "^1.7.5"
+    }
 }

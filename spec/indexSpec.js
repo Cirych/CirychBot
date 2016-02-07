@@ -1,6 +1,5 @@
 "use strict";
 //var main = require('../dist/main.js');
-
 /*
 describe("main", function () {
     it('should print Hello World!', function () {
@@ -17,6 +16,6 @@ describe('ES6', function () {
         main = new mainModule.Main();
     });
     it('Testing', () => {
-        expect(main.test('Success')).toEqual('Success');
+        expect(main.test()).toEqual('from main');
     });
 });
