@@ -5,7 +5,8 @@
   "description": "@CirychBot for Telegram messenger",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
+    "start": "node ./dist/main.js",
+    "pretest": "tsc",
     "test": "jasmine",
     "test-cov": "istanbul cover node_modules/jasmine/bin/jasmine.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
@@ -34,6 +35,7 @@
   "devDependencies": {
       "jasmine": "^2.4.1",
       "istanbul": "^0.4.2",
-      "coveralls": "^2.11.6"
+      "coveralls": "^2.11.6",
+      "typescript": "^1.7.5"
   }
 }

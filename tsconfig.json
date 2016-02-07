@@ -1,0 +1,19 @@
+{
+    "version": "1.7.5",
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es6",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "sourceMap": false,
+        "outDir": "dist"
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "spec"
+    ]
+}
