@@ -3,10 +3,10 @@
     "version": "0.0.2",
     "private": true,
     "description": "@CirychBot for Telegram messenger",
-    "main": "server.js",
+    "main": "index.js",
     "scripts": {
         "prestart": "tsc",
-        "start": "node ./server.js",
+        "start": "node ./index.js",
         "pretest": "tsc",
         "test": "jasmine",
         "test-fast": "istanbul cover --include-all-sources node_modules/jasmine/bin/jasmine.js",
