@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+media/
+spec/
+src/
+typings/
+.gitignore
+.travis.yml
+tsconfig.json
+*.log
+*.tgz

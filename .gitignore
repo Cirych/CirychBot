@@ -1,6 +1,7 @@
-node_modules
+node_modules/
 coverage/
-npm-debug.log
-dist
+dist/
 typings/*
 !typings/lib.d.ts
+*.log
+*.tgz
