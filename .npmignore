@@ -7,5 +7,7 @@ typings/
 .gitignore
 .travis.yml
 tsconfig.json
+tsd.json
 *.log
 *.tgz
+*.bat

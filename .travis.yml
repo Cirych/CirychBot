@@ -5,6 +5,8 @@ node_js:
 cache:
     directories:
         - node_modules
+before_script:
+    - npm run tsd
 after_success:
     - npm run test-cov
 notifications:
