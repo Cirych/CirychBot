@@ -1,17 +1,20 @@
 "use strict";
 
 export class Bot {
-    private internals: ISettings;
+    private internals: IEnvironment;
+    private botModuls: IBotModule[];
     
-    constructor(internals: ISettings) {
+    constructor(internals: IEnvironment, botModuls: IBotModule[]) {
+        if(!internals.token) throw new Error('no token');
         this.internals = internals;
+        this.botModuls = botModuls;
     }
     
     test() {
-        return this.internals.token;
+        return this.internals.token
     }
     
-    status(): string {
-        return this.internals ? "Ok!" : "Panic!";
+    status(test: any): string {
+        return this.internals[test] ? "Ok!" : "Panic!";
     }
 }
