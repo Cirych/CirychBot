@@ -1,20 +1,16 @@
 "use strict";
 
 export class Bot {
-    private internals: IEnvironment;
-    private botModuls: IBotModule[];
+    private botModuls: Map<string, any>;
     
-    constructor(internals: IEnvironment, botModuls: IBotModule[]) {
-        if(!internals.token) throw new Error('no token');
-        this.internals = internals;
+    constructor(botModuls: Map<string, any>) {
         this.botModuls = botModuls;
     }
     
-    test() {
-        return this.internals.token
+    test(val: string): string {
+        let botModule: IBotModule = this.botModuls.get(val);
+        return botModule ? botModule.getName(): 'no module';
     }
     
-    status(test: any): string {
-        return this.internals[test] ? "Ok!" : "Panic!";
-    }
+    test1 = (val: string): string => this.botModuls.get(val).getName();
 }

@@ -1,4 +1,5 @@
 var bot = require("./dist/main");
+
 var enviroment = {
     token: 'TELEGRAM_TOKEN',
     ip: 'OPENSHIFT_NODEJS_IP',
@@ -7,9 +8,9 @@ var enviroment = {
 };
 var botModulesDir = 'modules';
 var botModules = [
-    'test'
+    'test', 'test2'
 ];
 
 bot = new bot.Main(enviroment, botModules, botModulesDir);
-console.log(bot.status());
+console.log(bot.status('ip'));
 console.log(bot.test());

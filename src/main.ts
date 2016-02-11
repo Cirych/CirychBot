@@ -1,21 +1,22 @@
 "use strict";
 
 import {Settings} from "./settings";
+import {WebHook} from "./webhook";
 import {Bot} from "./bot";
 
-export class Main {
+export default class Main {
+    private webHook: any;
     private bot: Bot;
-    private botModules: any;
+    private botModules: Map<string, IBotModule>;
     
     constructor(environment: any, botModules: string[], botModulesDir: string) {
-        this.getSettings(environment)
-        this.botModules = this.getBotModules(botModules, botModulesDir)
-        this.bot = new Bot(this.getSettings(environment), this.botModules);
+        this.webHook = new WebHook(this.getSettings(environment));
+        this.botModules = this.setBotModules(botModules, botModulesDir)
+        this.bot = new Bot(this.botModules);
     }
     
     private getSettings(environment: any): IEnvironment {
-        var env = process.env;
-
+        let env = process.env;
         return {
         token: env[environment.token],
         ip: env[environment.ip],
@@ -24,11 +25,12 @@ export class Main {
         }
     }
     
-    private getBotModules(botModules: string[], botModulesDir: string): any {
-        let botModulesList: any = [];
-        for(let module of botModules) {
+    private setBotModules(botModules: string[], botModulesDir: string): Map<string, IBotModule> {
+        let botModulesList: Map<string, IBotModule> = new Map();
+        for(let moduleName of botModules) {
             try {
-                botModulesList.push(require("./" + botModulesDir + '/' + module));
+                let botModule: IBotModule = require(`./${botModulesDir}/${moduleName}/main`).Main;
+                botModulesList.set(moduleName, new botModule());
             } catch(e) {
                 console.log('bot module loading error');
                 console.log(e);
@@ -37,11 +39,15 @@ export class Main {
         return botModulesList;
     }
     
+    getBotModules(): Map<string, IBotModule> {
+        return this.botModules;
+    }
+    
     test(): string {
-        return this.bot.test();
+        return this.webHook.test();
     }
     
     status(test: any): string {
-        return this.bot.status(test);
+        return this.webHook.status(test);
     }
 }

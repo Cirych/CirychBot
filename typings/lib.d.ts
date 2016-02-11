@@ -11,5 +11,6 @@ declare interface ISettings {
 }
 
 declare interface IBotModule {
-    
+    new (): any;
+    getName(): string;
 }
