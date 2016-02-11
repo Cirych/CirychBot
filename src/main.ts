@@ -29,7 +29,7 @@ export default class Main {
         let botModulesList: Map<string, IBotModule> = new Map();
         for(let moduleName of botModules) {
             try {
-                let botModule: IBotModule = require(`./${botModulesDir}/${moduleName}/main`).Main;
+                let botModule: IBotModuleNew = require(`./${botModulesDir}/${moduleName}/main`).Main;
                 botModulesList.set(moduleName, new botModule());
             } catch(e) {
                 console.log('bot module loading error');

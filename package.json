@@ -39,7 +39,6 @@
         "jasmine": "^2.4.1",
         "istanbul": "^0.4.2",
         "coveralls": "^2.11.6",
-        "typescript": "^1.7.5",
-        "tsd": "latest"
+        "typescript": "^1.7.5"
     }
 }

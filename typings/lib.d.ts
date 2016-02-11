@@ -10,7 +10,10 @@ declare interface ISettings {
     
 }
 
-declare interface IBotModule {
+declare interface IBotModuleNew {
     new (): any;
+}
+
+declare interface IBotModule {
     getName(): string;
 }
