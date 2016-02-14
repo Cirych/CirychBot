@@ -3,6 +3,8 @@ declare interface IEnvironment {
     port: number;
     ip: string;
     domain: string;
+    key: Buffer,
+    cert: Buffer
     [key: string]: any;
 }
 

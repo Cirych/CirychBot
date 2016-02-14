@@ -12,5 +12,5 @@ export class Bot {
         return botModule ? botModule.getName(): 'no module';
     }
     
-    test1 = (val: string): string => this.botModuls.get(val).getName();
+    //test = (val: string): string => this.botModuls.get(val).getName();
 }

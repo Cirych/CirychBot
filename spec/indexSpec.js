@@ -28,7 +28,7 @@ describe('Main module', function () {
         expect(main.test()).toEqual('test');
     });
     it('Bot status Ok', () => {
-        expect(main.status('ip')).toEqual('Ok!');
+        expect(main.status('ip')).toEqual('666');
     });
 });
 
@@ -55,7 +55,7 @@ describe('webHook module', function () {
         wh = new webHookModule.WebHook(environment);
     });
     it('Bot status Ok', () => {
-        expect(wh.status('port')).toEqual('Panic!');
+        expect(wh.status('ip')).toEqual('TEST_IP');
     });
     it('Bot status Bad', () => {
         expect(wh.status('port')).toEqual('Panic!');

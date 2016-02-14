@@ -3,6 +3,7 @@ coverage/
 media/
 spec/
 src/
+certs/
 typings/
 .gitignore
 .travis.yml

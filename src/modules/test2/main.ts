@@ -1,6 +1,6 @@
 "use strict";
 
-export class Main implements IBotModule {
+export default class Main implements IBotModule {
     private name: string;
     
     constructor() {

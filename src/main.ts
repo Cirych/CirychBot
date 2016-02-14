@@ -3,6 +3,7 @@
 import {Settings} from "./settings";
 import {WebHook} from "./webhook";
 import {Bot} from "./bot";
+import * as fs from "fs";
 
 export default class Main {
     private webHook: any;
@@ -21,7 +22,9 @@ export default class Main {
         token: env[environment.token],
         ip: env[environment.ip],
         port: env[environment.port],
-        domain: env[environment.domain]
+        domain: env[environment.domain],
+        key: (environment.key?fs.readFileSync(environment.key):null),
+        cert: (environment.cert?fs.readFileSync(environment.cert):null)
         }
     }
     
