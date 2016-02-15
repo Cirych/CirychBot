@@ -1,15 +1,15 @@
 declare interface IEnvironment {
-    token: string;
     port: number;
     ip: string;
     domain: string;
     key: Buffer,
-    cert: Buffer
-    [key: string]: any;
+    cert: Buffer,
+    [key: string]: any
 }
 
-declare interface ISettings {
-    
+declare interface IBot {
+    getName(): string;
+    call(request: JSON): void;
 }
 
 declare interface IBotModuleNew {

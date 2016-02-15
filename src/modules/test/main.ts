@@ -4,7 +4,7 @@ export default class Main implements IBotModule {
     private name: string;
     
     constructor() {
-        this.name = 'test';
+        this.name = 'testble botssss';
     }
     
     getName(): string {

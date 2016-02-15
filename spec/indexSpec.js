@@ -1,24 +1,57 @@
 "use strict";
 
+var index = require('../index.js');
 var mainModule = require('../dist/main.js');
 var botModule = require('../dist/bot.js');
 var webHookModule = require('../dist/webhook.js');
 
-var environment = {
-    token: 'TEST_TOKEN',
-    ip: 'TEST_IP',
-    port: '',
-    domain: 'DNS'
+var enviroment = {
+		ip: 'OPENSHIFT_NODEJS_IP',
+		port: 'OPENSHIFT_NODEJS_PORT',
+		domain: 'OPENSHIFT_APP_DNS',
+		//key: "./certs/test.key",
+		//cert: "./certs/test.pem"
+	};
+var bots = {
+    'TELEGRAM_TOKEN1': {
+        default: ['test','test2']
+		},
+    'TELEGRAM_TOKEN2': {
+        default:[],
+        modules2: ['test','test2']
+		},
+	'TELEGRAM_TOKEN3': {
+        modules2: ['test','test2']
+		},
+	'TELEGRAM_TOKEN4': {
+        default: ['test2']
+		},
+    'TELEGRAM_TOKEN5': {}
 };
-var botModulesDir = 'modules';
-var botModules = [
-    'test', 'test2'
-];
 
+var token = 'TELEGRAM_TOKEN3';
 
-process.env.TEST_TOKEN = 'test';
-process.env.TEST_IP = 666;
+process.env.TELEGRAM_TOKEN1 = 'test1';
+process.env.TELEGRAM_TOKEN2 = 'test2';
+process.env.TELEGRAM_TOKEN3 = 'test3';
+process.env.TELEGRAM_TOKEN4 = 'test4';
+process.env.TELEGRAM_TOKEN5 = 'test5';
+process.env.OPENSHIFT_NODEJS_IP = 666;
+process.env.OPENSHIFT_NODEJS_PORT = 80;
 
+describe('Whole package', function () {
+    let testmodule;
+    beforeEach(() => {
+        testmodule = index(enviroment, bots);
+    });
+    it('Index test', () => {
+        expect(testmodule.test()).toEqual('666');
+    });
+    it('Index bad', () => {
+        expect(testmodule.status('ip')).toEqual('666');
+    });
+});
+/*
 describe('Main module', function () {
     let main;
     beforeEach(() => {
@@ -61,3 +94,4 @@ describe('webHook module', function () {
         expect(wh.status('port')).toEqual('Panic!');
     });
 });
+*/

@@ -1,24 +1,16 @@
-var bot = require("./dist/main");
+"use strict";
 
-var enviroment = {
-    token: 'TELEGRAM_TOKEN',
-    ip: 'OPENSHIFT_NODEJS_IP',
-    port: 'OPENSHIFT_NODEJS_PORT',
-    domain: 'OPENSHIFT_APP_DNS',
-    key: "./certs/test.key",
-    cert: "./certs/test.pem"
-};
-var botModulesDir = 'modules';
-var botModules = [
-    'test', 'test2'
-];
-// tests
-/*
-process.env.TELEGRAM_TOKEN = 'test';
-process.env.OPENSHIFT_NODEJS_IP = 'localhost';
-process.env.OPENSHIFT_NODEJS_PORT = '443';
-*/
+const main = require("./dist/main").Main;
 
-bot = new bot.Main(enviroment, botModules, botModulesDir);
-console.log(bot.status('ip'));
-console.log(bot.test());
+function MultiBot(enviroment, botsConfig) {
+
+    const multiBot = new main(enviroment);
+    if(typeof botsConfig == 'string')
+        multiBot.addBot(botsConfig);
+    else
+        for(let token in botsConfig) multiBot.addBot(token, botsConfig[token]);
+        
+    //var test = () => 'test';
+    return multiBot;
+}
+module.exports = exports = MultiBot;

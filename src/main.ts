@@ -1,55 +1,82 @@
 "use strict";
 
-import {Settings} from "./settings";
 import {WebHook} from "./webhook";
 import {Bot} from "./bot";
 import * as fs from "fs";
 
 export default class Main {
     private webHook: any;
-    private bot: Bot;
+    private bots: Map<string, IBot>;
     private botModules: Map<string, IBotModule>;
-    
-    constructor(environment: any, botModules: string[], botModulesDir: string) {
+
+    constructor(environment: any) {
+        this.bots = new Map();
         this.webHook = new WebHook(this.getSettings(environment));
-        this.botModules = this.setBotModules(botModules, botModulesDir)
-        this.bot = new Bot(this.botModules);
     }
     
     private getSettings(environment: any): IEnvironment {
         let env = process.env;
         return {
-        token: env[environment.token],
-        ip: env[environment.ip],
-        port: env[environment.port],
-        domain: env[environment.domain],
-        key: (environment.key?fs.readFileSync(environment.key):null),
-        cert: (environment.cert?fs.readFileSync(environment.cert):null)
+            ip: env[environment.ip],
+            port: env[environment.port],
+            domain: env[environment.domain],
+            key: (environment.key ? fs.readFileSync(environment.key) : null),
+            cert: (environment.cert ? fs.readFileSync(environment.cert) : null)
         }
     }
-    
-    private setBotModules(botModules: string[], botModulesDir: string): Map<string, IBotModule> {
+
+    private addBot(botToken: string, botConfig: any): void {
+        botToken = process.env[botToken];
+        botConfig = botConfig || {default:[]};
+        let botModules: Map<string, IBotModule> = new Map();
+        for(let item in botConfig)
+            botModules = new Map([...botModules, ...this.setBotModules(item, botConfig[item])]);
+        this.webHook.bots.set(botToken, new Bot(botToken, botModules));
+
+        /*
+        const newBot = new Bot(botToken, botModules);
+        for(let item of botToken)
+                this.webHook.bots.set(item, newBot);
+        */
+    }
+
+    private setBotModules(botModulesDir: string, botModules?: string[]): Map<string, IBotModule> {
+        console.log(botModulesDir);
+        if(botModulesDir === 'default') botModulesDir = __dirname + '/modules';
+        botModulesDir = botModulesDir || __dirname + '/modules';
         let botModulesList: Map<string, IBotModule> = new Map();
-        for(let moduleName of botModules) {
+        if(botModules.length === 0) botModules = this.getBotModulesFromString(botModulesDir);
+        for (let moduleName of botModules) {
             try {
-                let botModule: IBotModuleNew = require(`./${botModulesDir}/${moduleName}/main`).Main;
+                let botModule: IBotModuleNew = require(`${botModulesDir}/${moduleName}/main`).Main;
                 botModulesList.set(moduleName, new botModule());
-            } catch(e) {
-                console.log('bot module loading error');
+            } catch (e) {
+                console.log('bot module loading error in ' + botModulesDir);
                 console.log(e);
             }
         }
         return botModulesList;
     }
-    
+
+    private getBotModulesFromString(botModulesDir: string) {
+        try {
+            return fs.readdirSync(botModulesDir).filter(function(file) {
+                return fs.statSync(botModulesDir + '/' + file).isDirectory();
+            });
+        } catch (e) {
+            console.log('no modules found, start empty bot');
+            return [];
+        }
+    }
+
     getBotModules(): Map<string, IBotModule> {
         return this.botModules;
     }
-    
+
     test(): string {
         return this.webHook.test();
     }
-    
+
     status(test: any): string {
         return this.webHook.status(test);
     }
