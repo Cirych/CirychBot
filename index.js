@@ -11,6 +11,7 @@ function MultiBot(enviroment, botsConfig) {
         for(let token in botsConfig) multiBot.addBot(token, botsConfig[token]);
         
     //var test = () => 'test';
+    multiBot.webHook.setWebhook();
     return multiBot;
 }
 module.exports = exports = MultiBot;

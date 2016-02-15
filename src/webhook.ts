@@ -17,6 +17,50 @@ export class WebHook {
         this.listen();
     }
     
+    public setWebhook() {
+        for (let token of this.bots.keys()) {
+            let webhook = JSON.stringify({
+                'url': 'https://' + this.environment.domain + "/" + token
+            });
+            let options = {
+                protocol: 'https:',
+                hostname: 'api.telegram.org',
+                path: '/bot' + token + '/setWebhook',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': webhook.length
+                }
+            };
+            requestPromise(options, webhook).then(function(data: any) {
+                console.log("%s@%s: %s", data.name, data.version, data.description);
+            }, function(err) {
+                console.error("%s; %s", err.message, webhook);
+                console.log("%j", err.res.statusCode);
+            });
+        }
+        function requestPromise(options: {}, webhook: string) {
+            return new Promise(function(resolve, reject) {
+                var req = https.request(options, (res) => {
+                    console.log(`STATUS: ${res.statusCode}`);
+                    console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+                    res.setEncoding('utf8');
+                    res.on('data', (chunk: string) => {
+                        console.log(`BODY: ${chunk}`);
+                    });
+                    res.on('end', () => {
+                        console.log('No more data in response.')
+                    })
+                });
+                req.on('error', (e: ErrorEvent) => {
+                    console.log(`problem with request: ${e.message}`);
+                });
+                req.write(webhook);
+                req.end();
+            });
+        }
+    }
+    
     private createHttpsServer(): https.Server {
         const options: https.ServerOptions = {
             key: this.environment.key,
@@ -41,13 +85,20 @@ export class WebHook {
         if(!this.bots.has(token)) {
             res.statusCode = 401;
             res.end();
-        } else if(req.method === 'POST') {
+        } else if(true) { //req.method === 'POST'
             let body: string = '';
-            req.on('data', (chunk: string)=>body+=chunk.toString);
+            req.on('data', (chunk: string)=>body+=chunk.toString());
             req.on('end', () => {
-                this.bots.get(token).call(JSON.parse(body));
+                try {
+                let update = this.bots.get(token).call(JSON.parse(body));
+                res.setHeader('Content-Type', 'application/json');
                 res.writeHead(200);
-                res.end('OK');
+                res.end(JSON.stringify(update));
+                } catch(e) {
+                    console.log('error in request ' + e);
+                    res.writeHead(404);
+                    res.end('OK');
+                }
             });
         } else {
             res.statusCode = 418;

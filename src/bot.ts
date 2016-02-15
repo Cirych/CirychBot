@@ -9,8 +9,14 @@ export class Bot implements IBot {
         this.botModuls = botModuls;
     }
     
-    call(request: JSON) {
+    call(update: IUpdate) {
+        let reply: IsendMessage = {
+            "method":"sendMessage",
+            "chat_id":update.message.chat.id,
+            "text":"we're working on it's"
+        }
         
+        return reply;
     }
     
     getName() {
