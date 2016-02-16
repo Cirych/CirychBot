@@ -2,8 +2,9 @@
 
 export default class Main implements IBotModule {
     public config: IBotModuleConfig = {
-        name: 'Test module 2',
-        type: 'other',
+        name: 'Help module',
+        type: 'command',
+        command: '/help'
     }
     
     public action(message: IMessage): IReply {
@@ -11,7 +12,8 @@ export default class Main implements IBotModule {
         reply = {
             method: 'sendMessage',
             chat_id: message.chat.id,
-            text: 'Help Me I\'m Too Lazy To Escape!'
+            text: '<a href="https://github.com/Cirych/CirychBot">Try here</a>',
+            parse_mode: 'HTML'
         }
         return reply;
     }

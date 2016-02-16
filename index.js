@@ -9,9 +9,10 @@ function MultiBot(enviroment, botsConfig) {
         multiBot.addBot(botsConfig);
     else
         for(let token in botsConfig) multiBot.addBot(token, botsConfig[token]);
-        
+ //destructurig for(let [key, value] of botsConfig)       
     //var test = () => 'test';
-    multiBot.webHook.setWebhook();
+    if(enviroment.webhook)
+        multiBot.webHook.setWebhook();
     return multiBot;
 }
 module.exports = exports = MultiBot;
